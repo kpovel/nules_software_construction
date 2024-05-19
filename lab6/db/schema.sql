@@ -35,3 +35,6 @@ insert into policy (type, base_price)
 values ('Health', 1200);
 insert into policy (type, base_price)
 values ('Business', 3000);
+
+
+select id, type, base_price from policy;

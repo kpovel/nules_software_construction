@@ -1,4 +1,11 @@
 (executable
  (public_name lab6)
  (name main)
- (libraries lab6 base dream dream-html lwt))
+ (libraries
+  lab6
+  base
+  dream
+  dream-html
+  lwt
+  caqti-driver-sqlite3
+  ))
