@@ -23,7 +23,8 @@ create table ordered_policy (
     foreign key (policy_id) references policy (id)
 );
 
-insert into ordered_policy (user_id, policy_id, expired_at) values (1, 1, '2024-09-30');
+insert into ordered_policy (user_id, policy_id, expired_at)
+values (1, 1, '2024-09-30');
 
 insert into policy (type, base_price)
 values ('Auto', 1000);
@@ -37,4 +38,5 @@ insert into policy (type, base_price)
 values ('Business', 3000);
 
 
-select id, type, base_price from policy;
+select id, type, base_price
+from policy;

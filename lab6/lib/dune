@@ -1,2 +1,3 @@
 (library
+ (libraries base dream dream-html lwt caqti-driver-sqlite3 stdio)
  (name lab6))
