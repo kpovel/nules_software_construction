@@ -33,7 +33,7 @@ let index_page _req =
                      ]
                      [ txt "Sign up" ]
                  ; a
-                     [ href "#"
+                     [ href "/login"
                      ; class_
                          "inline-flex h-10 items-center justify-center rounded-md border \
                           border-gray-200 border-gray-200 bg-white px-8 text-sm \
