@@ -216,17 +216,6 @@ module type DB = Caqti_lwt.CONNECTION
 
 module T = Caqti_type
 
-let user_by_email email =
-  let open Lwt.Syntax in
-  let query =
-    let open Caqti_request.Infix in
-    (T.string ->* T.int) "select id from user where email = $1;"
-  in
-  fun (module Db : DB) ->
-    let* users = Db.collect_list query email in
-    Caqti_lwt.or_fail users
-;;
-
 let insert_user first_name last_name email password age =
   let open Lwt.Syntax in
   let open Caqti_request.Infix in
@@ -253,7 +242,7 @@ let signup_post req =
       ; ("last_name", last_name)
       ; ("password", password)
       ] ->
-    let* users = user_by_email email |> Dream.sql req in
+    let* users = Auth.user_by_email email |> Dream.sql req in
     (match List.length users with
      | 0 ->
        let* _ =
@@ -263,7 +252,7 @@ let signup_post req =
        Dream.empty
          `OK
          ~headers:
-           [ "Set-Cookie", Stdlib.Printf.sprintf "authorized=%s" email
+           [ "Set-Cookie", Stdlib.Printf.sprintf "authorized=%s; Path=/; HttpOnly" email
            ; "HX-Redirect", "/policy"
            ]
      | _ -> Dream.html "User with this email already exists")
